@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: 0
-  tower: {fileID: 0}
+  tower: {fileID: 11400000, guid: 20622d90b875d9b49a1efd6564b9022c, type: 2}
 --- !u!114 &3411690752052505301
 MonoBehaviour:
   m_ObjectHideFlags: 0

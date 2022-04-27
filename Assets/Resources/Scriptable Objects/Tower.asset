@@ -15,4 +15,4 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 837c6fc1465677d498c05b9d9c592c8c, type: 2}
   graphics: {fileID: 0}
   attacks: []
-  points: 0
+  points: 1
