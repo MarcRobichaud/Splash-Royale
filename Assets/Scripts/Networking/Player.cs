@@ -2,11 +2,8 @@ using Unity.Netcode;
 
 public class Player : NetworkBehaviour
 {
-    private UIManager uiManager;
-
     private void Start()
     {
-        uiManager = FindObjectOfType<UIManager>();
         if (IsOwner)
         {
             InitPlayerStatsServerRpc(OwnerClientId, IsHost);
@@ -16,7 +13,7 @@ public class Player : NetworkBehaviour
     [ServerRpc]
     private void InitPlayerStatsServerRpc(ulong id, bool isHost)
     {
-        uiManager.InitPlayerStats(id, isHost);
+        GameManager.Instance.Init(id, isHost);
     }
 
     private void Spawn()
