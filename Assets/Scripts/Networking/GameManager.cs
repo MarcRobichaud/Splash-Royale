@@ -18,8 +18,6 @@ public class GameManager : NetworkBehaviour
     public PlayerStats HostStats => hostStats.Value;
     public PlayerStats ClientStats => clientStats.Value;
     
-    
-    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,19 +48,11 @@ public class GameManager : NetworkBehaviour
 
     private void InitTowers(ulong id, bool isHost)
     {
-        if (isHost)
+        var towers = isHost ? hostTowers : clientTowers;
+
+        foreach (var tower in towers)
         {
-            foreach (var tower in hostTowers)
-            {
-                tower.owner = id;
-            }
-        }
-        else
-        {
-            foreach (var tower in clientTowers)
-            {
-                tower.owner = id;
-            }
+            tower.owner = id;
         }
     }
 }
