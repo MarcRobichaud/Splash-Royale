@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Attack", menuName = "ScriptableObjects/Graphic SO")]
+[CreateAssetMenu(fileName = "Graphic", menuName = "ScriptableObjects/Graphic SO")]
 public class GraphicSO : ScriptableObject
 {
-
 }

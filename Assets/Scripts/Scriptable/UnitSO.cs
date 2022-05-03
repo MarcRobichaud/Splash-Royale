@@ -8,4 +8,5 @@ public class UnitSO : ScriptableObject
     public MovementSO movement;
     public GraphicSO graphics;
     public List<AttackSO> attacks;
+    public PrioritySO priority;
 }
