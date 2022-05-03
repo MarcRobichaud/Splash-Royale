@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3578a22a3888a8341bdb865cdb6233c0, type: 3}
   m_Name: Unit
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: d97707a7daa5d994582cca94e4262590, type: 2}
   movement: {fileID: 11400000, guid: 795e8d986aff54d4b8137afc9b203659, type: 2}
   graphics: {fileID: 0}
   attacks: []
+  priority: {fileID: 11400000, guid: 3d41a06ba609f624486402d212161387, type: 2}
