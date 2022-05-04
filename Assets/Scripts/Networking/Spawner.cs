@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -29,5 +30,11 @@ public class Spawner
         nobj.GetComponent<NetworkObject>().Spawn();
         Unit unit = nobj.GetComponent<Unit>();
         unit.Init(id);
+
+        List<Unit> units = GameManager.Instance.IsIdHost(id)
+            ? GameManager.Instance.hostUnits
+            : GameManager.Instance.clientUnits;
+        
+        units.Add(unit);
     }
 }
