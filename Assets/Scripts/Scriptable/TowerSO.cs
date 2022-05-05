@@ -8,4 +8,9 @@ public class TowerSO : ScriptableObject
     public GraphicSO graphics;
     public List<AttackSO> attacks;
     public int points;
+
+    public void Init()
+    {
+        stats = GameObject.Instantiate(stats);
+    }
 }

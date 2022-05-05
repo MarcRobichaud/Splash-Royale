@@ -56,7 +56,7 @@ public class GameManager : NetworkBehaviour
 
         foreach (var tower in towers)
         {
-            tower.owner = id;
+            tower.Init(id);
         }
     }
 }
