@@ -9,16 +9,18 @@ public class Unit : NetworkBehaviour
 
     private Animator animator;
     private NavMeshAgent agent;
-    private ulong owner;
+    private ulong ID;
     private Vector3 target;
 
     public void Init(ulong id)
     {
         if (IsOwner)
         {
+            unitSO = GameObject.Instantiate(unitSO);
+            unitSO.Init();
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
-            owner = id;
+            ID = id;
             unitSO.movement.Init(agent);
             unitSO.priority.Init(id);
         }

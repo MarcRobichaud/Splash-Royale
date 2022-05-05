@@ -9,4 +9,11 @@ public class UnitSO : ScriptableObject
     public GraphicSO graphics;
     public List<AttackSO> attacks;
     public PrioritySO priority;
+
+    public void Init()
+    {
+        stats = GameObject.Instantiate(stats);
+        movement = GameObject.Instantiate(movement);
+        priority = GameObject.Instantiate(priority);
+    }
 }
