@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c71e9965458e545a71d890a10bca24, type: 3}
   m_Name: Priority
   m_EditorClassIdentifier: 
-  detectionRange: 10
+  detectionRange: 5

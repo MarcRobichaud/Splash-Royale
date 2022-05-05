@@ -9,6 +9,9 @@ public class WalkingSO : MovementSO
     public override void Init(NavMeshAgent agent = null)
     {
         this.agent = agent;
+        
+        if (agent)
+            agent.speed = MovementSpeed;
     }
 
     public override void Move(Vector3 destination)

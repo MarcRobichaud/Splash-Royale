@@ -37762,6 +37762,8 @@ MonoBehaviour:
   - {fileID: 916961641}
   - {fileID: 93106661}
   - {fileID: 479415275}
+  hostUnits: []
+  clientUnits: []
   hostStats:
     m_InternalValue:
       ID: 0
@@ -76710,7 +76712,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888238194}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268337, y: -0, z: -0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 14, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -7,6 +7,8 @@ public class Spawner
     private static Spawner instance = null;
 
     private GameObject unit1;
+    
+    List<Unit> Units(ulong id) =>   GameManager.Instance.IsIdHost(id) ? GameManager.Instance.hostUnits : GameManager.Instance.clientUnits;
     private Spawner()
     {
         unit1 = Resources.Load<GameObject>("prefabs/Paladin");
@@ -30,11 +32,7 @@ public class Spawner
         nobj.GetComponent<NetworkObject>().Spawn();
         Unit unit = nobj.GetComponent<Unit>();
         unit.Init(id);
-
-        List<Unit> units = GameManager.Instance.IsIdHost(id)
-            ? GameManager.Instance.hostUnits
-            : GameManager.Instance.clientUnits;
         
-        units.Add(unit);
+        Units(id).Add(unit);
     }
 }

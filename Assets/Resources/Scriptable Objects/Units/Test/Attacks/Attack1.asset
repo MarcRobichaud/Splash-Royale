@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 202e7b38a30f7fc47abe64f3b20b3052, type: 3}
-  m_Name: Walking
+  m_Script: {fileID: 11500000, guid: 15f34940e55992143b413c9155842af1, type: 3}
+  m_Name: Attack1
   m_EditorClassIdentifier: 
-  MovementSpeed: 2.5
+  stats: {fileID: 11400000, guid: c00abc0c0ddec864d9534b31f7958852, type: 2}
+  range: 2
+  time: 1

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Unit", menuName = "ScriptableObjects/Priority SO")]
@@ -12,37 +11,23 @@ public class PrioritySO : ScriptableObject
         Vector3.SqrMagnitude(position - targetPosition) <= SqrDetectionRange;
     
     private ulong ID;
-    private List<Tower> towers;
-    private List<Unit> units;
+    private List<Tower> Towers => GameManager.Instance.IsIdHost(ID) ? GameManager.Instance.clientTowers : GameManager.Instance.hostTowers;
+    private List<Unit> Units => GameManager.Instance.IsIdHost(ID) ? GameManager.Instance.clientUnits : GameManager.Instance.hostUnits;
+    
 
     public void Init(ulong id)
     {
         ID = id;
-        GetTargets();
-    }
-
-    private void GetTargets()
-    {
-        if (GameManager.Instance.IsIdHost(ID))
-        {
-            towers = GameManager.Instance.clientTowers;
-            units = GameManager.Instance.clientUnits;
-        }
-        else
-        {
-            towers = GameManager.Instance.hostTowers;
-            units = GameManager.Instance.hostUnits;
-        }
     }
 
     public Vector3 GetTarget(Vector3 position)
     {
-        Unit target = GetClosest(units, position);
+        Unit target = GetClosest(Units, position);
 
         if (target != null && IsInDetectionRange(position, target.transform.position))
             return target.transform.position;
         
-        return GetClosest(towers, position).transform.position;
+        return GetClosest(Towers, position).transform.position;
     }
     
     private T GetClosest<T>(List<T> list, Vector3 position) where T : MonoBehaviour
