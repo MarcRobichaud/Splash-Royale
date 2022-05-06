@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 
 [Serializable]
-public struct PlayerStats
+public struct PlayerStats : INetworkSerializeByMemcpy
 {
     private const int DefaultScore = 0;
     private const int DefaultMana = 10;
