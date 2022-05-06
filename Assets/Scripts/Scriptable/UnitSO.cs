@@ -15,5 +15,10 @@ public class UnitSO : ScriptableObject
         stats = GameObject.Instantiate(stats);
         movement = GameObject.Instantiate(movement);
         priority = GameObject.Instantiate(priority);
+        
+        for (int i = 0; i < attacks.Count; i++)
+        {
+            attacks[i] = GameObject.Instantiate(attacks[i]);
+        }
     }
 }

@@ -15,6 +15,11 @@ public class GameManager : NetworkBehaviour
 
     public bool IsIdHost(ulong id) => id == hostStats.Value.ID;
     
+    public List<Tower> GetTowers(ulong id) => IsIdHost(id) ? hostTowers : clientTowers;
+    public List<Unit> GetUnits(ulong id) => IsIdHost(id) ? hostUnits : clientUnits;
+    public List<Tower> GetOpponentTowers(ulong id) => IsIdHost(id) ? clientTowers : hostTowers;
+    public List<Unit> GetOpponentUnits(ulong id) => IsIdHost(id) ? clientUnits : hostUnits;
+    
     [SerializeField]
     private NetworkVariable<PlayerStats> hostStats = new NetworkVariable<PlayerStats>();
     [SerializeField]

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f34940e55992143b413c9155842af1, type: 3}
-  m_Name: Attack2
+  m_Name: Attack3
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: c00abc0c0ddec864d9534b31f7958852, type: 2}
   range: 1
-  cooldown: 1
+  cooldown: 2
   duration: 0
   isAOE: 0
   AOERange: 0

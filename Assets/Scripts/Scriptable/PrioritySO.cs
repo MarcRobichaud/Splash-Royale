@@ -5,16 +5,9 @@ using UnityEngine;
 public class PrioritySO : ScriptableObject
 {
     public float detectionRange;
-    private float SqrDetectionRange => detectionRange * detectionRange;
 
-    private bool IsInDetectionRange(Vector3 position, Vector3 targetPosition) =>
-        Vector3.SqrMagnitude(position - targetPosition) <= SqrDetectionRange;
-    
     private ulong ID;
-    private List<Tower> Towers => GameManager.Instance.IsIdHost(ID) ? GameManager.Instance.clientTowers : GameManager.Instance.hostTowers;
-    private List<Unit> Units => GameManager.Instance.IsIdHost(ID) ? GameManager.Instance.clientUnits : GameManager.Instance.hostUnits;
     
-
     public void Init(ulong id)
     {
         ID = id;
@@ -22,12 +15,12 @@ public class PrioritySO : ScriptableObject
 
     public Vector3 GetTarget(Vector3 position)
     {
-        Unit target = GetClosest(Units, position);
+        Unit target = GetClosest(GameManager.Instance.GetOpponentUnits(ID), position);
 
-        if (target != null && IsInDetectionRange(position, target.transform.position))
+        if (target != null &&  position.IsDistanceFromTargetInRange(target.transform.position, detectionRange))
             return target.transform.position;
         
-        return GetClosest(Towers, position).transform.position;
+        return GetClosest(GameManager.Instance.GetOpponentTowers(ID), position).transform.position;
     }
     
     private T GetClosest<T>(List<T> list, Vector3 position) where T : MonoBehaviour

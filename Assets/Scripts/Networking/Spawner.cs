@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ public class Spawner
 
     private GameObject unit1;
     
-    List<Unit> Units(ulong id) =>   GameManager.Instance.IsIdHost(id) ? GameManager.Instance.hostUnits : GameManager.Instance.clientUnits;
     private Spawner()
     {
         unit1 = Resources.Load<GameObject>("prefabs/Paladin");
@@ -31,8 +29,8 @@ public class Spawner
         GameObject nobj = GameObject.Instantiate(unit1, position, Quaternion.identity);
         nobj.GetComponent<NetworkObject>().Spawn();
         Unit unit = nobj.GetComponent<Unit>();
-        unit.Init(id);
+        unit.ServerInit(id);
         
-        Units(id).Add(unit);
+        GameManager.Instance.GetUnits(id).Add(unit);
     }
 }

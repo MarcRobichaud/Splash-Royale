@@ -15,5 +15,8 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: d97707a7daa5d994582cca94e4262590, type: 2}
   movement: {fileID: 11400000, guid: 795e8d986aff54d4b8137afc9b203659, type: 2}
   graphics: {fileID: 0}
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: e0a9429423d13764a9cb9be4598c06bc, type: 2}
+  - {fileID: 11400000, guid: a7012bfab9c64794fa8be6e56c4556ce, type: 2}
+  - {fileID: 11400000, guid: 2e348648165dac34fb3faae5559b5e08, type: 2}
   priority: {fileID: 11400000, guid: 3d41a06ba609f624486402d212161387, type: 2}
