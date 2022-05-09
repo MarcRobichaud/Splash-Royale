@@ -13,8 +13,9 @@ public class AttackSO : ScriptableObject
     private float timeStarted;
     public bool IsCooldownOver => Time.time - timeStarted > cooldown;
 
-    public void Attack()
+    public void Attack(IHitable target)
     {
         timeStarted = Time.time;
+        target.OnHit(stats.value);
     }
 }

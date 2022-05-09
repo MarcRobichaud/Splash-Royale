@@ -3,6 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObjects/Stats SO")]
 public class StatsSO : ScriptableObject
 {
-       [SerializeField]
-       private Stats stats;
+        [SerializeField] 
+        public Stats value;
+        
+        public Stats InitialValue { get; private set; }
+
+        public void Init()
+        {
+            InitialValue = value;
+        }
+
+        public bool IsDead => value.Hp <= 0;
+
+       public void Hit(Stats hitStats)
+       {
+           value.Hp += hitStats.Hp;
+       }
+
+
 }

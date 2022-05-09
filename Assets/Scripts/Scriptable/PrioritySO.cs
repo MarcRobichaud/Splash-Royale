@@ -13,14 +13,14 @@ public class PrioritySO : ScriptableObject
         ID = id;
     }
 
-    public Vector3 GetTarget(Vector3 position)
+    public IHitable GetTarget(Vector3 position)
     {
         Unit target = GetClosest(GameManager.Instance.GetOpponentUnits(ID), position);
 
         if (target != null &&  position.IsDistanceFromTargetInRange(target.transform.position, detectionRange))
-            return target.transform.position;
+            return target;
         
-        return GetClosest(GameManager.Instance.GetOpponentTowers(ID), position).transform.position;
+        return GetClosest(GameManager.Instance.GetOpponentTowers(ID), position);
     }
     
     private T GetClosest<T>(List<T> list, Vector3 position) where T : MonoBehaviour
