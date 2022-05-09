@@ -6,7 +6,6 @@ public class UnitSO : ScriptableObject
 {
     public StatsSO stats;
     public MovementSO movement;
-    public GraphicSO graphics;
     public List<AttackSO> attacks;
     public PrioritySO priority;
 
@@ -20,5 +19,6 @@ public class UnitSO : ScriptableObject
         {
             attacks[i] = GameObject.Instantiate(attacks[i]);
         }
+        stats.Init();
     }
 }

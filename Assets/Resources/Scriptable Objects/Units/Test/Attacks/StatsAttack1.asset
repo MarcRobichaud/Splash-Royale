@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6e5d1478d406145bb54c73a5f8afd0, type: 3}
   m_Name: StatsAttack1
   m_EditorClassIdentifier: 
-  stats:
-    Hp: -3
+  value:
+    Hp: -1
     MovementSpeed: 0
     AttackSpeed: 0
     Damage: 0

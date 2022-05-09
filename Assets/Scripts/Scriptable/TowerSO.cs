@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerSO : ScriptableObject
 {
     public StatsSO stats;
-    public GraphicSO graphics;
+    public Graphics graphics;
     public List<AttackSO> attacks;
     public int points;
 
@@ -16,5 +16,6 @@ public class TowerSO : ScriptableObject
         {
             attacks[i] = GameObject.Instantiate(attacks[i]);
         }
+        stats.Init();
     }
 }

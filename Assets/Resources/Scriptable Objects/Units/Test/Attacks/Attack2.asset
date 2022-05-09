@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack2
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: c00abc0c0ddec864d9534b31f7958852, type: 2}
-  range: 1
+  range: 1.75
   cooldown: 1
   duration: 0
   isAOE: 0
