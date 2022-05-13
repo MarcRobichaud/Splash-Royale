@@ -1,36 +1,20 @@
-using Unity.Netcode;
 using UnityEngine;
 
 public class Spawner
 {
     private static Spawner instance = null;
+    public static Spawner Instance => instance ??= new Spawner();
 
-    private GameObject unit1;
-    
     private Spawner()
     {
-        unit1 = Resources.Load<GameObject>("prefabs/Paladin");
     }
 
-    public static Spawner Instance
+    public void Spawn(ulong id, Vector3 position, Cards card)
     {
-        get
+        if (Pool.Instance.IsInit)
         {
-            if (instance == null)
-            {
-                instance = new Spawner();
-            }
-            return instance;
+            Unit unit = Pool.Instance.GetNewUnit(card, position, id);
+            GameManager.Instance.GetUnits(id).Add(unit);
         }
-    }
-
-    public void Spawn(ulong id, Vector3 position)
-    {
-        GameObject nobj = GameObject.Instantiate(unit1, position, Quaternion.identity);
-        nobj.GetComponent<NetworkObject>().Spawn();
-        Unit unit = nobj.GetComponent<Unit>();
-        unit.ServerInit(id);
-        
-        GameManager.Instance.GetUnits(id).Add(unit);
     }
 }

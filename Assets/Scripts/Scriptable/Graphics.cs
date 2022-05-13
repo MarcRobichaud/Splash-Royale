@@ -31,7 +31,21 @@ public class Graphics : NetworkBehaviour
         animator.Animator.SetTrigger(isAttackingParam);
         AttackingClientRpc();
     }
-    
+
+    public void ResetSelf()
+    {
+        animator.Animator.SetFloat(speedParam, 0);
+        animator.Animator.SetFloat(attackParam, 0);
+        animator.Animator.ResetTrigger(isAttackingParam);
+        ResetAttackingParamClientRpc();
+    }
+
+    [ClientRpc]
+    private void ResetAttackingParamClientRpc()
+    {
+        animator.Animator.ResetTrigger(isAttackingParam);
+    }
+
     [ClientRpc]
     private void AttackingClientRpc()
     {

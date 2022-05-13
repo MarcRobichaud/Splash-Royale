@@ -9,6 +9,11 @@ public class UnitSO : ScriptableObject
     public List<AttackSO> attacks;
     public PrioritySO priority;
 
+    [SerializeField] 
+    private Cards card;
+
+    public Cards Card => card;
+
     public void Init()
     {
         stats = GameObject.Instantiate(stats);

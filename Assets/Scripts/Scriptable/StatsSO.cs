@@ -13,12 +13,15 @@ public class StatsSO : ScriptableObject
             InitialValue = value;
         }
 
+        public void ResetSelf()
+        {
+            value = InitialValue;
+        }
+
         public bool IsDead => value.Hp <= 0;
 
        public void Hit(Stats hitStats)
        {
            value.Hp += hitStats.Hp;
        }
-
-
 }

@@ -473,6 +473,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 415287891258781815, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701420837181973649, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Name
       value: Paladin
@@ -481,6 +489,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1051571768989249988, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -488,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 1082271958561512970, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1339101018200438765, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Layer
@@ -520,6 +536,10 @@ PrefabInstance:
     - target: {fileID: 3047284246813455858, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099756089343826349, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3135921509060577837, guid: 83d591003837e8b4f98bc56ceeb88f12, type: 3}
       propertyPath: m_Layer
@@ -679,6 +699,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSO: {fileID: 11400000, guid: ff4864612b744bf458430ab245acf28a, type: 2}
   networkStats:
+    m_InternalValue:
+      Hp: 0
+      MovementSpeed: 0
+      AttackSpeed: 0
+      Damage: 0
+  initialStats:
     m_InternalValue:
       Hp: 0
       MovementSpeed: 0

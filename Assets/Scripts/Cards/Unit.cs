@@ -12,7 +12,7 @@ public class Unit : NetworkBehaviour, IHitable
     private Graphics graphics;
     private ulong ID;
     private IHitable target;
-    
+
     public IHitable.Death OnDeath { get; set; }
     
     [SerializeField]
@@ -34,20 +34,25 @@ public class Unit : NetworkBehaviour, IHitable
     {
         graphics = GetComponent<Graphics>();
         graphics.Init(GetComponent<NetworkAnimator>());
-        OnDeath += DestroySelf;
     }
 
-    public void ServerInit(ulong id)
+    public void ServerInit()
     {
+        
         if (IsOwner)
         {
             unitSO = GameObject.Instantiate(unitSO);
             unitSO.Init();
             agent = GetComponent<NavMeshAgent>();
-            ID = id;
             unitSO.movement.Init(agent);
-            unitSO.priority.Init(id);
+            OnDeath += DestroySelf;
         }
+    }
+
+    public void IdInit(ulong id)
+    {
+        ID = id;
+        unitSO.priority.Init(id);
     }
 
     private void Update()
@@ -106,6 +111,16 @@ public class Unit : NetworkBehaviour, IHitable
         unitSO.attacks[currentAttack].Attack(target);
     }
 
+    public void ResetSelf()
+    {
+        currentAttack = 0;
+        isMoving = false;
+        isAttacking = false;
+        graphics.ResetSelf();
+        unitSO.stats.ResetSelf();
+    }
+
+
     public void OnHit(Stats stats)
     {
         unitSO.stats.Hit(stats);
@@ -117,7 +132,7 @@ public class Unit : NetworkBehaviour, IHitable
     private void DestroySelf()
     {
         GameManager.Instance.GetUnits(ID).Remove(this);
-        Destroy(gameObject);
+        Pool.Instance.PoolUnit(this);
     }
 }
 

@@ -6,7 +6,7 @@ public class GameManager : NetworkBehaviour
 {
     private static GameManager instance;
 
-    public static GameManager Instance { get { return instance; } }
+    public static GameManager Instance => instance;
 
     public List<Tower> hostTowers = new List<Tower>();
     public List<Tower> clientTowers = new List<Tower>();
@@ -43,6 +43,13 @@ public class GameManager : NetworkBehaviour
     {
         InitPlayerStats(id, isHost);
         InitTowers(id, isHost);
+
+        if (NetworkManager.ConnectedClients.Count == 2)
+        {
+            List<Cards> cardsList = new List<Cards> {Cards.Paladin};
+            
+            Pool.Instance.Init(cardsList);
+        }
     }
 
     private void InitPlayerStats(ulong id, bool isHost)
