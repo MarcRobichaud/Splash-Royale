@@ -8,11 +8,14 @@ public class Unit : NetworkBehaviour, IHitable
 {
     public UnitSO unitSO;
     
+    private ulong ID;
+    
+    private UnitState state = UnitState.Idle;
+    private int currentAttack;
+    
     private NavMeshAgent agent;
     private Graphics graphics;
-    private ulong ID;
     private IHitable target;
-
     public IHitable.Death OnDeath { get; set; }
     
     [SerializeField]
@@ -20,13 +23,9 @@ public class Unit : NetworkBehaviour, IHitable
     
     [SerializeField]
     private NetworkVariable<Stats> initialStats = new NetworkVariable<Stats>();
-
-    private int currentAttack;
-    private bool isAttacking;
-
-    private const float StopThreshold = 0.01f;
-    private bool IsStopped => agent.velocity.sqrMagnitude < StopThreshold;
-    private bool isMoving;
+    
+    private bool IsTargetReached => transform.position.IsDistanceFromTargetInRange(target.transform.position, agent.stoppingDistance);
+    private bool IsTargetInAttackRange => transform.position.IsDistanceFromTargetInRange(target.transform.position, unitSO.attacks[currentAttack].range);
 
     public Image UIHealth;
 
@@ -38,7 +37,6 @@ public class Unit : NetworkBehaviour, IHitable
 
     public void ServerInit()
     {
-        
         if (IsOwner)
         {
             unitSO = GameObject.Instantiate(unitSO);
@@ -59,32 +57,19 @@ public class Unit : NetworkBehaviour, IHitable
     {
         if (IsOwner)
         {
-            target = unitSO.priority.GetTarget(transform.position);
-            unitSO.movement.Move(target.transform.position);
+            OnAnyState();
             
-            Vector3 targetDirection = target.transform.position - transform.position;
-            
-            transform.rotation =
-                Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, 1.0f, 0.0f));
-            
-            if (isAttacking && unitSO.attacks[currentAttack].IsCooldownOver)
-                ChangeAttack();
-
-            if (IsStopped && !isAttacking && transform.position.IsDistanceFromTargetInRange(target.transform.position, unitSO.attacks[currentAttack].range))
+            switch (state)
             {
-                StartAttack();
-            }
-
-            if (!IsStopped && !isMoving)
-            {
-                graphics.MoveAnimation(true);
-                isMoving = true;
-            }
-            
-            if (IsStopped && !isAttacking && isMoving)
-            {
-                graphics.MoveAnimation(false);
-                isMoving = false;
+                case UnitState.Idle:
+                    OnIdle();
+                    break;
+                case UnitState.Walking:
+                    OnMoving();
+                    break;
+                case UnitState.Attacking:
+                    OnAttacking();
+                    break;
             }
 
             if (networkStats.Value != unitSO.stats.value)
@@ -97,30 +82,102 @@ public class Unit : NetworkBehaviour, IHitable
         UIHealth.fillAmount = networkStats.Value.Hp / initialStats.Value.Hp;
     }
 
+    private void OnAnyState()
+    {
+        target = unitSO.priority.GetTarget(transform.position);
+        
+        //Rotate toward target
+        Vector3 targetDirection = target.transform.position - transform.position;
+
+        transform.rotation =
+            Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, 1.0f, 0.0f));
+    }
+
+    private void OnMovingEnter()
+    {
+        state = UnitState.Walking;
+        graphics.MoveAnimation(true);
+    }
+
+    private void OnMoving()
+    {
+        unitSO.movement.Move(target.transform.position);
+
+        if (IsTargetReached)
+        {
+            OnMovingExit();
+            
+            if (IsTargetInAttackRange)
+                OnAttackingEnter();
+            else
+                OnIdleEnter();
+        }
+    }
+
+    private void OnMovingExit()
+    {
+        graphics.MoveAnimation(false);
+    }
+
+    private void OnAttackingEnter()
+    {
+        state = UnitState.Attacking;
+        Attack();
+    }
+
+    private void OnAttacking()
+    {
+        if (unitSO.attacks[currentAttack].IsCooldownOver)
+        {
+            ChangeAttack();
+            Attack();
+        }
+        
+        if (!IsTargetReached)
+        {
+            OnAttackingExit();
+            OnMovingEnter();
+        }
+    }
+
+    private void OnAttackingExit()
+    {
+        currentAttack = 0;
+    }
+
+    private void OnIdleEnter()
+    {
+        state = UnitState.Idle;
+    }
+
+    private void OnIdle()
+    {
+        if (!IsTargetReached)
+            OnMovingEnter();
+        else if (IsTargetInAttackRange)
+            OnAttackingEnter();
+    }
+
+    private void Attack()
+    {
+        graphics.AttackAnimation(currentAttack);
+        unitSO.attacks[currentAttack].Attack(target);
+    }
+    
     private void ChangeAttack()
     {
         currentAttack++;
         currentAttack %= unitSO.attacks.Count;
-        isAttacking = false;
     }
-
-    private void StartAttack()
-    {
-        graphics.AttackAnimation(currentAttack);
-        isAttacking = true;
-        unitSO.attacks[currentAttack].Attack(target);
-    }
-
+    
     public void ResetSelf()
     {
         currentAttack = 0;
-        isMoving = false;
-        isAttacking = false;
+        state = UnitState.Idle;
         graphics.ResetSelf();
         unitSO.stats.ResetSelf();
     }
-
-
+    
     public void OnHit(Stats stats)
     {
         unitSO.stats.Hit(stats);
@@ -135,4 +192,3 @@ public class Unit : NetworkBehaviour, IHitable
         Pool.Instance.PoolUnit(this);
     }
 }
-
