@@ -13,8 +13,14 @@ public class Spawner
     {
         if (Pool.Instance.IsInit)
         {
-            Unit unit = Pool.Instance.GetNewUnit(card, position, id);
-            GameManager.Instance.GetUnits(id).Add(unit);
+            int cost = Pool.Instance.CardSos[card].manaCost;
+            PlayerStats pStats = GameManager.Instance.GetStats(id);
+            
+            if (ManaManager.Instance.TryBuy(pStats, cost))
+            {
+                Unit unit = Pool.Instance.GetNewUnit(card, position, id);
+                GameManager.Instance.GetUnits(id).Add(unit);
+            }
         }
     }
 }

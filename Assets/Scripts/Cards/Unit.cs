@@ -93,6 +93,7 @@ public class Unit : NetworkBehaviour, IHitable
             Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, 1.0f, 0.0f));
     }
 
+    #region Moving State
     private void OnMovingEnter()
     {
         state = UnitState.Walking;
@@ -118,7 +119,9 @@ public class Unit : NetworkBehaviour, IHitable
     {
         graphics.MoveAnimation(false);
     }
-
+    #endregion
+    
+    #region Attacking State
     private void OnAttackingEnter()
     {
         state = UnitState.Attacking;
@@ -144,7 +147,21 @@ public class Unit : NetworkBehaviour, IHitable
     {
         currentAttack = 0;
     }
-
+    
+    private void Attack()
+    {
+        graphics.AttackAnimation(currentAttack);
+        unitSO.attacks[currentAttack].Attack(target);
+    }
+    
+    private void ChangeAttack()
+    {
+        currentAttack++;
+        currentAttack %= unitSO.attacks.Count;
+    }
+    #endregion
+    
+    #region Idle State
     private void OnIdleEnter()
     {
         state = UnitState.Idle;
@@ -157,18 +174,7 @@ public class Unit : NetworkBehaviour, IHitable
         else if (IsTargetInAttackRange)
             OnAttackingEnter();
     }
-
-    private void Attack()
-    {
-        graphics.AttackAnimation(currentAttack);
-        unitSO.attacks[currentAttack].Attack(target);
-    }
-    
-    private void ChangeAttack()
-    {
-        currentAttack++;
-        currentAttack %= unitSO.attacks.Count;
-    }
+    #endregion
     
     public void ResetSelf()
     {

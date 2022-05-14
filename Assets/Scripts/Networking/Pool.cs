@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,7 @@ public class Pool : NetworkBehaviour
     {
     }
     #endregion
-    
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -27,14 +28,17 @@ public class Pool : NetworkBehaviour
             instance = this;
         }
     }
-    
+
+
     public bool IsInit { get; private set; }
 
     private const int InitialSpawnNumber = 10;
-    
+
+    public Dictionary<Cards, CardSO> CardSos = new Dictionary<Cards, CardSO>();
+        
     private Dictionary<Cards, Unit> unitResources = new Dictionary<Cards, Unit>();
     private Dictionary<Cards, Stack<Unit>> availableCardList = new Dictionary<Cards, Stack<Unit>>();
-    
+
     public void Init(List<Cards> cardsList)
     {
         IsInit = true;
@@ -43,6 +47,7 @@ public class Pool : NetworkBehaviour
         {
             Debug.Log("prefabs/" + card);
             unitResources.Add(card, Resources.Load<Unit>("prefabs/"+ card));
+            CardSos.Add(card, Resources.Load<CardSO>("Scriptable Objects/Cards/" + card));
         }
 
         foreach (var unitResource in unitResources)

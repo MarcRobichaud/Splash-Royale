@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -19,7 +20,10 @@ public class GameManager : NetworkBehaviour
     public List<Unit> GetUnits(ulong id) => IsIdHost(id) ? hostUnits : clientUnits;
     public List<Tower> GetOpponentTowers(ulong id) => IsIdHost(id) ? clientTowers : hostTowers;
     public List<Unit> GetOpponentUnits(ulong id) => IsIdHost(id) ? clientUnits : hostUnits;
-    
+
+    public PlayerStats GetStats(ulong id) => IsIdHost(id) ? HostStats : ClientStats;
+    private NetworkVariable<PlayerStats> GetNetworkStats(ulong id) => IsIdHost(id) ? hostStats : clientStats;
+
     [SerializeField]
     private NetworkVariable<PlayerStats> hostStats = new NetworkVariable<PlayerStats>();
     [SerializeField]
@@ -39,16 +43,25 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (IsHost)
+            ManaManager.Instance.TryRegenerateMana(HostStats, ClientStats);
+    }
+
     public void Init(ulong id, bool isHost)
     {
-        InitPlayerStats(id, isHost);
-        InitTowers(id, isHost);
-
-        if (NetworkManager.ConnectedClients.Count == 2)
+        if (IsHost)
         {
-            List<Cards> cardsList = new List<Cards> {Cards.Paladin};
+            InitPlayerStats(id, isHost);
+            InitTowers(id, isHost);
+
+            if (NetworkManager.ConnectedClients.Count == 2)
+            {
+                List<Cards> cardsList = new List<Cards> {Cards.Paladin};
             
-            Pool.Instance.Init(cardsList);
+                Pool.Instance.Init(cardsList);
+            }
         }
     }
 
@@ -69,6 +82,14 @@ public class GameManager : NetworkBehaviour
         foreach (var tower in towers)
         {
             tower.Init(id);
+        }
+    }
+
+    public void UpdateStats(PlayerStats stats)
+    {
+        if (IsHost)
+        {
+            GetNetworkStats(stats.ID).Value = stats;
         }
     }
 }

@@ -28,4 +28,20 @@ public struct PlayerStats : INetworkSerializeByMemcpy
                "Mana: " + Mana + '\n' +
                "Lives: " + Lives + '\n';
     }
+
+    public void RegenMana(int amount)
+    {
+        Mana += amount;
+
+        if (Mana > DefaultMana)
+            Mana = DefaultMana;
+        
+        if (Mana < 0)
+            Mana = 0;
+    }
+
+    public void RemoveMana(int amount)
+    {
+        RegenMana(-amount);
+    }
 }
