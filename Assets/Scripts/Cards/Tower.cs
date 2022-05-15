@@ -1,10 +1,13 @@
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Tower : NetworkBehaviour, IHitable
 {
-    private ulong ID;
+    public ulong ID => id;
+    
+    private ulong id;
     public TowerSO tower;
     public Image UIHealth;
     
@@ -18,8 +21,9 @@ public class Tower : NetworkBehaviour, IHitable
 
     public IHitable.Death OnDeath { get; set; }
 
-    public void Init(ulong id)
+    public void Init(ulong _id)
     {
+        id = _id;
         tower = GameObject.Instantiate(tower);
         tower.Init();
     }

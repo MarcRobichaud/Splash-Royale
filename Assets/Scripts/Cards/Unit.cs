@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class Unit : NetworkBehaviour, IHitable
 {
     public UnitSO unitSO;
-    
-    private ulong ID;
+
+    public ulong ID => id;
+
+    private ulong id;
     
     private UnitState state = UnitState.Idle;
     private int currentAttack;
@@ -47,9 +49,9 @@ public class Unit : NetworkBehaviour, IHitable
         }
     }
 
-    public void IdInit(ulong id)
+    public void IdInit(ulong _id)
     {
-        ID = id;
+        id = _id;
         unitSO.priority.Init(id);
     }
 

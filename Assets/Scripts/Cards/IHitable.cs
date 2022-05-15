@@ -1,7 +1,9 @@
 using UnityEngine;
 
 public interface IHitable
-{ 
+{
+    public ulong ID { get; }
+
     public delegate void Death();
 
     public Death OnDeath { get; set; }

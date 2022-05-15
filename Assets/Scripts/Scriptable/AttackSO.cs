@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Attack", menuName = "ScriptableObjects/Attack SO")]
@@ -16,6 +17,46 @@ public class AttackSO : ScriptableObject
     public void Attack(IHitable target)
     {
         timeStarted = Time.time;
-        target.OnHit(stats.value);
+        if (isAOE)
+        {
+            List<IHitable> targets = GetTargetsInAOE(target);
+
+            Debug.Log(targets.Count);
+            foreach (var t in targets)
+            {
+                t.OnHit(stats.value);
+            }
+        }
+        else
+        {
+            target.OnHit(stats.value);
+        }
+    }
+
+    public List<IHitable> GetTargetsInAOE(IHitable target)
+    {
+        List<Unit> units = GameManager.Instance.GetUnits(target.ID);
+        List<Tower> towers = GameManager.Instance.GetTowers(target.ID);
+
+        List<IHitable> targets = GetTargetInRange(units, target);
+        GetTargetInRange(towers, target, targets);
+        
+        return targets;
+    }
+
+    private List<IHitable> GetTargetInRange<T>(List<T> possibleTargets, IHitable target, List<IHitable> targets = null) where T : IHitable
+    {
+        if (targets == null)
+            targets = new List<IHitable>();
+
+        foreach (var t in possibleTargets)
+        {
+            if (target.transform.position.IsDistanceFromTargetInRange(t.transform.position, AOERange))
+            {
+                targets.Add(t);
+            }
+        }
+
+        return targets;
     }
 }
