@@ -16,9 +16,7 @@ public class Tower : NetworkBehaviour, IHitable
 
     [SerializeField] 
     private NetworkVariable<Stats> initialStats = new NetworkVariable<Stats>();
-
-
-
+    
     public IHitable.Death OnDeath { get; set; }
 
     public void Init(ulong _id)
@@ -48,6 +46,11 @@ public class Tower : NetworkBehaviour, IHitable
         
         if(tower.stats.IsDead)
             OnDeath.Invoke();
+    }
+
+    public void OnEffectHit(Effect effect)
+    {
+        throw new System.NotImplementedException();
     }
 }
     

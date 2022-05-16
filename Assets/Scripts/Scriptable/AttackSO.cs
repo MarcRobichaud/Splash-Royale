@@ -20,17 +20,24 @@ public class AttackSO : ScriptableObject
         if (isAOE)
         {
             List<IHitable> targets = GetTargetsInAOE(target);
-
-            Debug.Log(targets.Count);
+            
             foreach (var t in targets)
             {
-                t.OnHit(stats.value);
+                Hit(t);
             }
         }
         else
         {
-            target.OnHit(stats.value);
+            Hit(target);
         }
+    }
+
+    private void Hit(IHitable target)
+    {
+        if (duration <= 0)
+            target.OnHit(stats.value);
+        else 
+            target.OnEffectHit(new Effect(stats.value, Time.time, duration));
     }
 
     public List<IHitable> GetTargetsInAOE(IHitable target)

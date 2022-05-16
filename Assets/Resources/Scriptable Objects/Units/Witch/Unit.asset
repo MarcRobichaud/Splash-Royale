@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3578a22a3888a8341bdb865cdb6233c0, type: 3}
+  m_Name: Unit
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 8cf6a960b3ffc4845b96265c249956ce, type: 2}
+  movement: {fileID: 11400000, guid: 7dc933e1f34005545849eb998fe0e3ac, type: 2}
+  attacks:
+  - {fileID: 11400000, guid: 1582890888d1819418295ad60925d6c9, type: 2}
+  - {fileID: 11400000, guid: 1582890888d1819418295ad60925d6c9, type: 2}
+  - {fileID: 11400000, guid: 5161c981c372f3f4891b65f3ebce6200, type: 2}
+  priority: {fileID: 11400000, guid: 658e443882293e946bcb752ae46c832e, type: 2}
+  card: 0

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Unit : NetworkBehaviour, IHitable
 {
+    public Image UIHealth;
     public UnitSO unitSO;
 
     public ulong ID => id;
@@ -18,6 +19,8 @@ public class Unit : NetworkBehaviour, IHitable
     private NavMeshAgent agent;
     private Graphics graphics;
     private IHitable target;
+
+    private EffectApplier effectApplier = new EffectApplier();
     public IHitable.Death OnDeath { get; set; }
     
     [SerializeField]
@@ -28,15 +31,12 @@ public class Unit : NetworkBehaviour, IHitable
     
     private bool IsTargetReached => transform.position.IsDistanceFromTargetInRange(target.transform.position, agent.stoppingDistance);
     private bool IsTargetInAttackRange => transform.position.IsDistanceFromTargetInRange(target.transform.position, unitSO.attacks[currentAttack].range);
-
-    public Image UIHealth;
-
+    
     private void Awake()
     {
         graphics = GetComponent<Graphics>();
         graphics.Init(GetComponent<NetworkAnimator>());
     }
-
     public void ServerInit()
     {
         if (IsOwner)
@@ -93,6 +93,8 @@ public class Unit : NetworkBehaviour, IHitable
 
         transform.rotation =
             Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, 1.0f, 0.0f));
+        
+        effectApplier.TryApplyEffect(this);
     }
 
     #region Moving State
@@ -184,6 +186,7 @@ public class Unit : NetworkBehaviour, IHitable
         state = UnitState.Idle;
         graphics.ResetSelf();
         unitSO.stats.ResetSelf();
+        effectApplier.Flush();
     }
     
     public void OnHit(Stats stats)
@@ -192,6 +195,11 @@ public class Unit : NetworkBehaviour, IHitable
         
         if (unitSO.stats.IsDead)
             OnDeath.Invoke();
+    }
+
+    public void OnEffectHit(Effect effect)
+    {
+        effectApplier.AddEffect(effect);   
     }
 
     private void DestroySelf()

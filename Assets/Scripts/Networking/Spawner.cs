@@ -15,8 +15,10 @@ public class Spawner
         {
             int cost = Pool.Instance.CardSos[card].manaCost;
             PlayerStats pStats = GameManager.Instance.GetStats(id);
+
+            bool isInRange = GameManager.Instance.IsIdHost(id) ? position.z > 0 : position.z < 0;
             
-            if (ManaManager.Instance.TryBuy(pStats, cost))
+            if (isInRange && ManaManager.Instance.TryBuy(pStats, cost))
             {
                 Unit unit = Pool.Instance.GetNewUnit(card, position, id);
                 GameManager.Instance.GetUnits(id).Add(unit);

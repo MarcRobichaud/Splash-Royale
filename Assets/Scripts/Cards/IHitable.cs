@@ -9,4 +9,6 @@ public interface IHitable
     public Death OnDeath { get; set; }
     public Transform transform { get; }
     public void OnHit(Stats stats);
+
+    public void OnEffectHit(Effect effect);
 }
