@@ -6,9 +6,10 @@ public class WalkingSO : MovementSO
 {
     private NavMeshAgent agent;
     
-    public override void Init(NavMeshAgent agent = null)
+    public override void Init(float range, NavMeshAgent agent = null)
     {
         this.agent = agent;
+        this.agent.stoppingDistance = range - 0.25f;
         
         if (agent)
             agent.speed = MovementSpeed;

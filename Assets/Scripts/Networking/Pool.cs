@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Components;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,8 +27,7 @@ public class Pool : NetworkBehaviour
             instance = this;
         }
     }
-
-
+    
     public bool IsInit { get; private set; }
 
     private const int InitialSpawnNumber = 10;

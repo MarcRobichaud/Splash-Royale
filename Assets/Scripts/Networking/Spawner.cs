@@ -24,5 +24,9 @@ public class Spawner
                 GameManager.Instance.GetUnits(id).Add(unit);
             }
         }
+        else
+        {
+            Debug.Log("Pool not initialize");
+        }
     }
 }

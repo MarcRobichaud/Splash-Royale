@@ -44,7 +44,7 @@ public class Unit : NetworkBehaviour, IHitable
             unitSO = GameObject.Instantiate(unitSO);
             unitSO.Init();
             agent = GetComponent<NavMeshAgent>();
-            unitSO.movement.Init(agent);
+            unitSO.movement.Init(unitSO.attacks[currentAttack].range, agent);
             OnDeath += DestroySelf;
         }
     }
@@ -66,7 +66,7 @@ public class Unit : NetworkBehaviour, IHitable
                 case UnitState.Idle:
                     OnIdle();
                     break;
-                case UnitState.Walking:
+                case UnitState.Moving:
                     OnMoving();
                     break;
                 case UnitState.Attacking:
@@ -100,7 +100,7 @@ public class Unit : NetworkBehaviour, IHitable
     #region Moving State
     private void OnMovingEnter()
     {
-        state = UnitState.Walking;
+        state = UnitState.Moving;
         graphics.MoveAnimation(true);
     }
 
@@ -136,6 +136,7 @@ public class Unit : NetworkBehaviour, IHitable
     {
         if (unitSO.attacks[currentAttack].IsCooldownOver)
         {
+            unitSO.attacks[currentAttack].Attack(target);
             ChangeAttack();
             Attack();
         }
@@ -154,8 +155,8 @@ public class Unit : NetworkBehaviour, IHitable
     
     private void Attack()
     {
+        unitSO.attacks[currentAttack].StartAttack();
         graphics.AttackAnimation(currentAttack);
-        unitSO.attacks[currentAttack].Attack(target);
     }
     
     private void ChangeAttack()

@@ -34,6 +34,6 @@ public class Player : NetworkBehaviour
     [ServerRpc]
     private void SpawnServerRpc(ulong id, Vector3 position)
     {
-        Spawner.Instance.Spawn(id, position, Cards.Paladin);
+        Spawner.Instance.Spawn(id, position, Cards.Witch);
     }
 }

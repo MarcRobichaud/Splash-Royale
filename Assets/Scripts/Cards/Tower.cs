@@ -50,7 +50,7 @@ public class Tower : NetworkBehaviour, IHitable
 
     public void OnEffectHit(Effect effect)
     {
-        throw new System.NotImplementedException();
+        
     }
 }
     

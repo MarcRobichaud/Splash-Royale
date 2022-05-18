@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectApplier
@@ -17,16 +18,18 @@ public class EffectApplier
     public void TryApplyEffect(Unit unit)
     {
         if (activeEffects.Count <= 0 || !IsApplyEffectReady) return;
-        
+
         timeLastEffectStarted = Time.time;
-        
-        foreach (var effect in activeEffects)
+
+        for (int i = activeEffects.Count - 1; i >= 0 && i < activeEffects.Count; i--)
         {
-            if (!effect.IsEffectStillActive)
-                activeEffects.Remove(effect);
+            if (!activeEffects[i].IsEffectStillActive)
+            {
+                activeEffects.Remove(activeEffects[i]);
+            }
             else
             {
-                unit.OnHit(effect.EffectStats);
+                unit.OnHit(activeEffects[i].EffectStats);
             }
         }
     }

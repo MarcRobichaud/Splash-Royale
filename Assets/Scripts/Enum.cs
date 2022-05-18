@@ -1,11 +1,12 @@
 public enum Cards
 {
-    Paladin
+    Paladin,
+    Witch
 }
 
 public enum UnitState
 {
     Idle,
-    Walking,
+    Moving,
     Attacking
 }

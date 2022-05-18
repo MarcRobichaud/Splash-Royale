@@ -14,9 +14,13 @@ public class AttackSO : ScriptableObject
     private float timeStarted;
     public bool IsCooldownOver => Time.time - timeStarted > cooldown;
 
-    public void Attack(IHitable target)
+    public void StartAttack()
     {
         timeStarted = Time.time;
+    }
+
+    public void Attack(IHitable target)
+    {
         if (isAOE)
         {
             List<IHitable> targets = GetTargetsInAOE(target);

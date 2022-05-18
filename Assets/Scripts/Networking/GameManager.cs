@@ -58,7 +58,7 @@ public class GameManager : NetworkBehaviour
 
             if (NetworkManager.ConnectedClients.Count == 2)
             {
-                List<Cards> cardsList = new List<Cards> {Cards.Paladin};
+                List<Cards> cardsList = new List<Cards> {Cards.Paladin, Cards.Witch};
             
                 Pool.Instance.Init(cardsList);
             }
