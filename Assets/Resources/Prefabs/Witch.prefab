@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIHealth: {fileID: 7980726867699455469}
-  unitSO: {fileID: 0}
+  unitSO: {fileID: 11400000, guid: 736a138e638579e40aa427a1e6654542, type: 2}
   networkStats:
     m_InternalValue:
       Hp: 0
@@ -1519,7 +1519,7 @@ Animator:
   m_GameObject: {fileID: 5453394396361437957}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1a94bbc8cb220f4287ae37a5a0dd2aa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animator: {fileID: 0}
+  m_Animator: {fileID: 4676295400398449080}
 --- !u!1 &5464778105644990731
 GameObject:
   m_ObjectHideFlags: 0

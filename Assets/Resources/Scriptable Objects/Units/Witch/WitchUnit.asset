@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3578a22a3888a8341bdb865cdb6233c0, type: 3}
-  m_Name: Unit
+  m_Name: WitchUnit
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 8cf6a960b3ffc4845b96265c249956ce, type: 2}
   movement: {fileID: 11400000, guid: 7dc933e1f34005545849eb998fe0e3ac, type: 2}

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 9b1f22b36fe2bc74fa45d2c835cdcff9
+guid: 5fd0730d7dc67324892451af9d432f66
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Walking
+    second: Orc Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walking
+      name: Orc Idle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 42
+      lastFrame: 160
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

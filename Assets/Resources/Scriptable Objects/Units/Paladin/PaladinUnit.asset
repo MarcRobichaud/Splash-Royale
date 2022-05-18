@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3578a22a3888a8341bdb865cdb6233c0, type: 3}
-  m_Name: Unit
+  m_Name: PaladinUnit
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: d97707a7daa5d994582cca94e4262590, type: 2}
   movement: {fileID: 11400000, guid: 795e8d986aff54d4b8137afc9b203659, type: 2}
