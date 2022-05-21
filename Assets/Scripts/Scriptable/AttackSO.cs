@@ -8,19 +8,36 @@ public class AttackSO : ScriptableObject
     public float range;
     public float cooldown;
     public float duration; //for damage overtime
+    
     public bool isAOE;
     public float AOERange;
+    
+    public bool hasParticleEffect;
+    public ParticlesEffects particlesEffect;
+    public bool isParticleEffectFromTarget;
+    public bool isEffectAtStart;
 
     private float timeStarted;
+    private IHitable target;
+    private Unit u;
     public bool IsCooldownOver => Time.time - timeStarted > cooldown;
 
-    public void StartAttack()
+    public void StartAttack(IHitable _target, Unit _u)
     {
+        target = _target;
+        u = _u;
+        
+        if (hasParticleEffect && isEffectAtStart)
+            StartParticles();
+
         timeStarted = Time.time;
     }
 
-    public void Attack(IHitable target)
+    public void Attack()
     {
+        if (hasParticleEffect && !isEffectAtStart)
+            StartParticles();
+        
         if (isAOE)
         {
             List<IHitable> targets = GetTargetsInAOE(target);
@@ -69,5 +86,14 @@ public class AttackSO : ScriptableObject
         }
 
         return targets;
+    }
+
+    private void StartParticles()
+    {
+        Vector3 position = isParticleEffectFromTarget ? target.transform.position : u.transform.position;
+        Quaternion rotation = isParticleEffectFromTarget ? target.transform.rotation : u.transform.rotation;
+        position.y += 1;
+            
+        ParticleManager.Instance.InstantiateParticle(particlesEffect, position, rotation);
     }
 }

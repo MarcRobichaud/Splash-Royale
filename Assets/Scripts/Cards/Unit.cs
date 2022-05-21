@@ -29,7 +29,7 @@ public class Unit : NetworkBehaviour, IHitable
     [SerializeField]
     private NetworkVariable<Stats> initialStats = new NetworkVariable<Stats>();
     
-    private bool IsTargetReached => transform.position.IsDistanceFromTargetInRange(target.transform.position, agent.stoppingDistance);
+    private bool IsTargetReached => transform.position.IsDistanceFromTargetInRange(target.transform.position, unitSO.attacks[currentAttack].range);
     private bool IsTargetInAttackRange => transform.position.IsDistanceFromTargetInRange(target.transform.position, unitSO.attacks[currentAttack].range);
     
     private void Awake()
@@ -136,7 +136,7 @@ public class Unit : NetworkBehaviour, IHitable
     {
         if (unitSO.attacks[currentAttack].IsCooldownOver)
         {
-            unitSO.attacks[currentAttack].Attack(target);
+            unitSO.attacks[currentAttack].Attack();
             ChangeAttack();
             Attack();
         }
@@ -155,7 +155,7 @@ public class Unit : NetworkBehaviour, IHitable
     
     private void Attack()
     {
-        unitSO.attacks[currentAttack].StartAttack();
+        unitSO.attacks[currentAttack].StartAttack(target, this);
         graphics.AttackAnimation(currentAttack);
     }
     

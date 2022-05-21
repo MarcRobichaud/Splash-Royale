@@ -13,11 +13,18 @@ public class ManaManager
     private const int RegeneratedMana = 1;
     private float lastRegenerationTime;
 
+    private bool isInit;
+
+    public void Init()
+    {
+        isInit = true;
+    }
+
     public bool CanBuy(PlayerStats stats, int manaCost) => stats.Mana >= manaCost;
 
     public void TryRegenerateMana(PlayerStats stats1, PlayerStats stats2)
     {
-        if (Time.time > lastRegenerationTime + ManaRegenerationTime)
+        if (isInit && Time.time > lastRegenerationTime + ManaRegenerationTime)
         {
             Debug.Log("Regen Mana");
             lastRegenerationTime = Time.time;

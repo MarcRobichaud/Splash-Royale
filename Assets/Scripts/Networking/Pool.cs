@@ -114,18 +114,21 @@ public class Pool : NetworkBehaviour
     [ClientRpc]
     private void SetGameObjectActiveClientRpc(ulong objID, bool isActive)
     {
-        GameObject go = NetworkManager.SpawnManager.SpawnedObjects[objID].gameObject;
+        if (!IsHost)
+        {
+            GameObject go = NetworkManager.SpawnManager.SpawnedObjects[objID].gameObject;
 
-        SkinnedMeshRenderer[] mr = go.GetComponentsInChildren<SkinnedMeshRenderer>();
+            SkinnedMeshRenderer[] mr = go.GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        if (!isActive)
-            foreach (var t in mr)
-                t.enabled = false;
+            if (!isActive)
+                foreach (var t in mr)
+                    t.enabled = false;
 
-        go.SetActive(isActive);
+            go.SetActive(isActive);
 
-        if (isActive)
-            StartCoroutine(SetRenderer(mr));
+            if (isActive)
+                StartCoroutine(SetRenderer(mr));
+        }
     }
     
     private IEnumerator SetRenderer(SkinnedMeshRenderer[] mr)

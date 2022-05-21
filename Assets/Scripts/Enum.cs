@@ -10,3 +10,9 @@ public enum UnitState
     Moving,
     Attacking
 }
+
+public enum ParticlesEffects
+{
+    WitchSingle,
+    WitchAOE
+}
