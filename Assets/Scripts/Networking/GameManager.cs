@@ -113,5 +113,30 @@ public class GameManager : NetworkBehaviour
         
         UpdateStats(host);
         UpdateStats(client);
+        
+        if (host.Lives <= 0 || client.Lives <= 0)
+            GameOver();
+    }
+
+    private void GameOver()
+    {
+        for (int i = hostUnits.Count - 1; i >= 0; i--)
+        {
+            hostUnits[i].OnDeath.Invoke();
+        }
+
+        for (int i = clientUnits.Count - 1; i >= 0; i--)
+        {
+            clientUnits[i].OnDeath.Invoke();
+        }
+
+        Spawner.Instance.isGameOver = true;
+        GameOverClientRpc();
+    }
+
+    [ClientRpc]
+    private void GameOverClientRpc()
+    {
+        FindObjectOfType<UIManager>().gameOver.gameObject.SetActive(true);
     }
 }

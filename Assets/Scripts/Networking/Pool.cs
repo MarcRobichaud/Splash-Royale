@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using Unity.Netcode;
@@ -47,8 +48,15 @@ public class Pool : NetworkBehaviour
         foreach (var card in cardsList)
         {
             Debug.Log("prefabs/" + card);
-            unitResources.Add(card, Resources.Load<Unit>(prefabsPath + card));
-            CardSos.Add(card, Resources.Load<CardSO>( cardsPath + card));
+            
+            Unit u = Resources.Load<Unit>(prefabsPath + card);
+            CardSO c = Resources.Load<CardSO>(cardsPath + card);
+
+            if (u == null || c == null)
+                throw new Exception("File not  found for " + card + " " + prefabsPath + card + " " + cardsPath + card);
+            
+            unitResources.Add(card, u);
+            CardSos.Add(card, c);
         }
 
         foreach (var unitResource in unitResources)

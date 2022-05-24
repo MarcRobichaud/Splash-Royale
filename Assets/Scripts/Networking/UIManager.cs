@@ -13,6 +13,8 @@ public class UIManager : NetworkBehaviour
     public TMP_Text yourID;
     public TMP_Text hisID;
 
+    public TMP_Text gameOver;
+
     public Camera p1Cam;
     public Camera p2Cam;
 
@@ -70,6 +72,9 @@ public class UIManager : NetworkBehaviour
 
         if (connectButton != null)
             connectButton.gameObject.SetActive(false);
+        
+        if (inputField != null)
+            inputField.gameObject.SetActive(false);
     }
 
     private void TurnOnCamera(Camera cam, bool on)

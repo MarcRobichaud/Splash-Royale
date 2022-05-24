@@ -5,13 +5,15 @@ public class Spawner
     private static Spawner instance = null;
     public static Spawner Instance => instance ??= new Spawner();
 
+    public bool isGameOver;
+
     private Spawner()
     {
     }
 
     public void Spawn(ulong id, Vector3 position, Cards card)
     {
-        if (Pool.Instance.IsInit)
+        if (Pool.Instance.IsInit && !isGameOver)
         {
             int cost = Pool.Instance.CardSos[card].manaCost;
             PlayerStats pStats = GameManager.Instance.GetStats(id);
@@ -24,7 +26,7 @@ public class Spawner
                 GameManager.Instance.GetUnits(id).Add(unit);
             }
         }
-        else
+        else if (!Pool.Instance.IsInit)
         {
             Debug.Log("Pool not initialize");
         }
