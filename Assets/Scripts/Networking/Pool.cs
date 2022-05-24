@@ -30,12 +30,15 @@ public class Pool : NetworkBehaviour
     
     public bool IsInit { get; private set; }
 
-    private const int InitialSpawnNumber = 10;
+    private const int InitialSpawnNumber = 5;
 
     public Dictionary<Cards, CardSO> CardSos = new Dictionary<Cards, CardSO>();
         
     private Dictionary<Cards, Unit> unitResources = new Dictionary<Cards, Unit>();
     private Dictionary<Cards, Stack<Unit>> availableCardList = new Dictionary<Cards, Stack<Unit>>();
+
+    private string prefabsPath = "prefabs/Units/";
+    private string cardsPath = "Scriptable Objects/Cards/";
 
     public void Init(List<Cards> cardsList)
     {
@@ -44,8 +47,8 @@ public class Pool : NetworkBehaviour
         foreach (var card in cardsList)
         {
             Debug.Log("prefabs/" + card);
-            unitResources.Add(card, Resources.Load<Unit>("prefabs/"+ card));
-            CardSos.Add(card, Resources.Load<CardSO>("Scriptable Objects/Cards/" + card));
+            unitResources.Add(card, Resources.Load<Unit>(prefabsPath + card));
+            CardSos.Add(card, Resources.Load<CardSO>( cardsPath + card));
         }
 
         foreach (var unitResource in unitResources)

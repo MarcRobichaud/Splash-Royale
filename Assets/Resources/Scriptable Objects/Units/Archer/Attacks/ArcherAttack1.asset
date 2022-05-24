@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f34940e55992143b413c9155842af1, type: 3}
+  m_Name: ArcherAttack1
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 182c8b94aec13c742b1d97b5287dcda9, type: 2}
+  range: 4
+  cooldown: 1.25
+  duration: 0
+  isAOE: 0
+  AOERange: 0
+  hasParticleEffect: 1
+  particlesEffect: 2
+  isParticleEffectFromTarget: 0
+  isEffectAtStart: 0

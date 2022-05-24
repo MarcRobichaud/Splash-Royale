@@ -5,6 +5,9 @@ using UnityEngine;
 public class PrioritySO : ScriptableObject
 {
     public float detectionRange;
+    public bool isHealer;
+    
+    private List<Unit> GetUnits => !isHealer ? GameManager.Instance.GetOpponentUnits(ID) : GetUnitsWithoutHealer();
 
     private ulong ID;
     
@@ -15,14 +18,27 @@ public class PrioritySO : ScriptableObject
 
     public IHitable GetTarget(Vector3 position)
     {
-        Unit target = GetClosest(GameManager.Instance.GetOpponentUnits(ID), position);
+        Unit target = GetClosest(GetUnits, position);
 
         if (target != null &&  position.IsDistanceFromTargetInRange(target.transform.position, detectionRange))
             return target;
         
         return GetClosest(GameManager.Instance.GetOpponentTowers(ID), position);
     }
-    
+
+    private List<Unit> GetUnitsWithoutHealer()
+    {
+        List<Unit> units = new List<Unit>();
+        
+        foreach (var unit in GameManager.Instance.GetUnits(ID))
+        {
+            if (!unit.unitSO.priority.isHealer)
+                units.Add(unit);
+        }
+
+        return units;
+    }
+
     private T GetClosest<T>(List<T> list, Vector3 position) where T : MonoBehaviour
     {
         if (list == null || list.Count == 0) return null;

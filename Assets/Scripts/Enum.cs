@@ -1,7 +1,9 @@
 public enum Cards
 {
     Paladin,
-    Witch
+    Witch,
+    Archer,
+    Healer
 }
 
 public enum UnitState
@@ -14,5 +16,6 @@ public enum UnitState
 public enum ParticlesEffects
 {
     WitchSingle,
-    WitchAOE
+    WitchAOE,
+    ArcherSingle
 }

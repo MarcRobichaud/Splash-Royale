@@ -21,6 +21,10 @@ public class Unit : NetworkBehaviour, IHitable
     private IHitable target;
 
     private EffectApplier effectApplier = new EffectApplier();
+
+    private SkinnedMeshRenderer[] meshs;
+    
+    
     public IHitable.Death OnDeath { get; set; }
     
     [SerializeField]
@@ -36,6 +40,7 @@ public class Unit : NetworkBehaviour, IHitable
     {
         graphics = GetComponent<Graphics>();
         graphics.Init(GetComponent<NetworkAnimator>());
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
     public void ServerInit()
     {

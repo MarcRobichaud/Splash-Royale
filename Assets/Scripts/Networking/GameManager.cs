@@ -58,11 +58,11 @@ public class GameManager : NetworkBehaviour
 
             if (NetworkManager.ConnectedClients.Count == 2)
             {
-                List<Cards> cardsList = new List<Cards> {Cards.Paladin, Cards.Witch};
+                List<Cards> cardsList = new List<Cards> {Cards.Paladin, Cards.Witch, Cards.Archer, Cards.Healer};
             
                 Pool.Instance.Init(cardsList);
                 ManaManager.Instance.Init();
-                ParticleManager.Instance.Init();
+                //ParticleManager.Instance.Init();
             }
         }
     }

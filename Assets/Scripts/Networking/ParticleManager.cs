@@ -15,8 +15,8 @@ public class ParticleManager : NetworkBehaviour
         } 
         else
         {
-            instance = this;
             Init();
+            instance = this;
         }
     }
     

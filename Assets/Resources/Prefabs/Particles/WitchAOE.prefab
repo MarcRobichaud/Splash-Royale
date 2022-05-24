@@ -9784,6 +9784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270978813720692675}
+  - component: {fileID: 7620903885014870836}
   m_Layer: 0
   m_Name: WitchAOE
   m_TagString: Untagged
@@ -9812,6 +9813,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7620903885014870836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270978813720692685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56efff68b57d8e419a6f340548a88cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliveTime: 1
 --- !u!1 &270978814308921394
 GameObject:
   m_ObjectHideFlags: 0

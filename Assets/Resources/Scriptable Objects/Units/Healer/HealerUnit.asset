@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3578a22a3888a8341bdb865cdb6233c0, type: 3}
+  m_Name: HealerUnit
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: ccc73fcf5c826654baa807c0d2448c40, type: 2}
+  movement: {fileID: 11400000, guid: acce8fdd96ad0b345b007431a8975d68, type: 2}
+  attacks:
+  - {fileID: 11400000, guid: 8b311030726ce614281bc02a2846694e, type: 2}
+  - {fileID: 11400000, guid: 8b311030726ce614281bc02a2846694e, type: 2}
+  - {fileID: 11400000, guid: e3cabdf3516de27458b76d3c545d92dd, type: 2}
+  priority: {fileID: 11400000, guid: 6a3490bea2a5dd84f99c8671f725b1da, type: 2}
+  card: 3

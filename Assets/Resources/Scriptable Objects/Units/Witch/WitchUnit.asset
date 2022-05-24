@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1582890888d1819418295ad60925d6c9, type: 2}
   - {fileID: 11400000, guid: 5161c981c372f3f4891b65f3ebce6200, type: 2}
   priority: {fileID: 11400000, guid: 658e443882293e946bcb752ae46c832e, type: 2}
-  card: 0
+  card: 1

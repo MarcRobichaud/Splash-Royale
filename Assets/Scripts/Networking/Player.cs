@@ -3,12 +3,28 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
+    private Cards selected;
     private void Start()
     {
         if (IsOwner)
         {
             InitPlayerStatsServerRpc(OwnerClientId, IsHost);
+
+            UnitSelector selector = FindObjectOfType<UnitSelector>();
+            
+            if (selector)
+                selector.Init(this);
+            else
+            {
+                Debug.Log("unit selector not found");
+            }
         }
+    }
+
+    public void ChangeSelectedUnit(Cards card)
+    {
+        if (IsOwner)
+            selected = card;
     }
 
     [ServerRpc]
@@ -26,14 +42,14 @@ public class Player : NetworkBehaviour
   
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                SpawnServerRpc(OwnerClientId, hit.transform.position);
+                SpawnServerRpc(OwnerClientId, hit.transform.position, selected);
             }
         }
     }
 
     [ServerRpc]
-    private void SpawnServerRpc(ulong id, Vector3 position)
+    private void SpawnServerRpc(ulong id, Vector3 position, Cards card)
     {
-        Spawner.Instance.Spawn(id, position, Cards.Witch);
+        Spawner.Instance.Spawn(id, position, card);
     }
 }
