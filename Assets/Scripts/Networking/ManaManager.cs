@@ -9,7 +9,7 @@ public class ManaManager
     {
     }
     
-    private const float ManaRegenerationTime = 5;
+    private const float ManaRegenerationTime = 3.5f;
     private const int RegeneratedMana = 1;
     private float lastRegenerationTime;
 

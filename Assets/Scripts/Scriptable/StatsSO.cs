@@ -23,5 +23,10 @@ public class StatsSO : ScriptableObject
        public void Hit(Stats hitStats)
        {
            value.Hp += hitStats.Hp;
+
+           if (value.Hp > InitialValue.Hp)
+           {
+               value.Hp = InitialValue.Hp;
+           }
        }
 }
