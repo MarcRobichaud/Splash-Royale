@@ -66,7 +66,7 @@ public class Pool : NetworkBehaviour
     {
         Unit unit = GameObject.Instantiate(unitResources[card], Vector3.zero, Quaternion.identity);
         
-        unit.GetComponent<NetworkObject>().Spawn();
+        unit.NetworkObject.Spawn();
         unit.ServerInit();
         unit.enabled = false;
         unit.GetComponent<NavMeshAgent>().enabled = false;
@@ -121,20 +121,19 @@ public class Pool : NetworkBehaviour
         {
             GameObject go = NetworkManager.SpawnManager.SpawnedObjects[objID].gameObject;
 
-            SkinnedMeshRenderer[] mr = go.GetComponentsInChildren<SkinnedMeshRenderer>();
+            Unit u = go.GetComponent<Unit>();
         
             if (!isActive)
-                foreach (var t in mr)
-                    t.enabled = false;
+                u.SetSkinnedMeshRenderers(false);
 
             go.SetActive(isActive);
 
             if (isActive)
-                StartCoroutine(SetRenderer(mr));
+                StartCoroutine(SetRenderer(u));
         }
     }
     
-    private IEnumerator SetRenderer(SkinnedMeshRenderer[] mr)
+    private IEnumerator SetRenderer(Unit u)
     {
         yield return null;
         yield return null;
@@ -146,9 +145,6 @@ public class Pool : NetworkBehaviour
         yield return null;
         yield return null;
         yield return null;
-        foreach (var t in mr)
-        {
-            t.enabled = true;
-        }
+        u.SetSkinnedMeshRenderers(true);
     }
 }

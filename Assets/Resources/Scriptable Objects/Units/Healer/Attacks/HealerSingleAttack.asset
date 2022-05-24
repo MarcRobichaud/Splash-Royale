@@ -18,7 +18,7 @@ MonoBehaviour:
   duration: 0
   isAOE: 0
   AOERange: 0
-  hasParticleEffect: 0
-  particlesEffect: 0
+  hasParticleEffect: 1
+  particlesEffect: 3
   isParticleEffectFromTarget: 0
   isEffectAtStart: 0

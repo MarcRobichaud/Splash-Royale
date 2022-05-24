@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -62,7 +61,6 @@ public class GameManager : NetworkBehaviour
             
                 Pool.Instance.Init(cardsList);
                 ManaManager.Instance.Init();
-                //ParticleManager.Instance.Init();
             }
         }
     }
@@ -93,5 +91,27 @@ public class GameManager : NetworkBehaviour
         {
             GetNetworkStats(stats.ID).Value = stats;
         }
+    }
+
+    public void TowerDeath(Tower tower)
+    {
+        GetTowers(tower.ID).Remove(tower);
+        
+        PlayerStats host = HostStats;
+        PlayerStats client = ClientStats;
+        
+        if (IsIdHost(tower.ID))
+        {
+            host.Lives -= tower.tower.points;
+            client.Score += tower.tower.points;
+        }
+        else
+        {
+            client.Lives -= tower.tower.points;
+            host.Score += tower.tower.points;
+        }
+        
+        UpdateStats(host);
+        UpdateStats(client);
     }
 }

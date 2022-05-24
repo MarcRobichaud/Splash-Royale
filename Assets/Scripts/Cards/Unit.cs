@@ -89,6 +89,14 @@ public class Unit : NetworkBehaviour, IHitable
         UIHealth.fillAmount = networkStats.Value.Hp / initialStats.Value.Hp;
     }
 
+    public void SetSkinnedMeshRenderers(bool isActive)
+    {
+        foreach (var m in meshs)
+        {
+            m.enabled = isActive;
+        }
+    }
+
     private void OnAnyState()
     {
         target = unitSO.priority.GetTarget(transform.position);

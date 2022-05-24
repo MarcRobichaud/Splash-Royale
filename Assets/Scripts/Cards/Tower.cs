@@ -23,6 +23,7 @@ public class Tower : NetworkBehaviour, IHitable
         id = _id;
         tower = GameObject.Instantiate(tower);
         tower.Init();
+        OnDeath += DestroySelf;
     }
 
     private void Update()
@@ -37,6 +38,12 @@ public class Tower : NetworkBehaviour, IHitable
         }
 
         UIHealth.fillAmount = networkStats.Value.Hp / initialStats.Value.Hp;
+    }
+
+    private void DestroySelf()
+    {
+        GameManager.Instance.TowerDeath(this);
+        Destroy(gameObject);
     }
 
     public void OnHit(Stats stats)

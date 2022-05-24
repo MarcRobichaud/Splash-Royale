@@ -17,5 +17,6 @@ public enum ParticlesEffects
 {
     WitchSingle,
     WitchAOE,
-    ArcherSingle
+    ArcherSingle,
+    HealerSingle
 }

@@ -1,5 +1,6 @@
 using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UNET;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,10 @@ public class UIManager : NetworkBehaviour
 
     public Camera p1Cam;
     public Camera p2Cam;
+
+    public TMP_InputField inputField;
+    
+    public UNetTransport transport;
     
     private void Awake()
     {
@@ -48,8 +53,11 @@ public class UIManager : NetworkBehaviour
 
     private void InitClient()
     {
-        NetworkManager.Singleton.StartClient(); 
-                
+        if (inputField.text != "")
+            transport.ConnectAddress = inputField.text;
+
+        NetworkManager.StartClient();
+        
         TurnOnCamera(p1Cam, false);
         TurnOnCamera(p2Cam, true);
         TurnOffButtons();
