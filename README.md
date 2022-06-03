@@ -1,6 +1,10 @@
 # Splash Royale
 A mulitplayer auto battler tower defense strategy game inspired by clash royale made with Netcode
 
+
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/zc7zoFc0a-8/0.jpg)]([http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE](https://www.youtube.com/watch?v=zc7zoFc0a-8) "Video Title")
+
 ## Units
 
  - Paladin
